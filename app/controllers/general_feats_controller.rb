@@ -8,8 +8,14 @@ class GeneralFeatsController < ApplicationController
     end
     
     def index
-        actions = GeneralFeat.find(session[:character_id]).job.general_feats
-        render json: actions, status: :ok
+        general_feat = Character.find(session[:character_id]).job.general_feats
+        render json: general_feat, status: :ok
+    end
+
+    def destroy
+        general_feat = GeneralFeat.find(params[:id])
+        general_feat.destroy
+        head :no_content
     end
 
     private

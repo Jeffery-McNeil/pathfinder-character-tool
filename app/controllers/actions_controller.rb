@@ -12,6 +12,23 @@ class ActionsController < ApplicationController
         render json: actions, status: :ok
     end
 
+    def show
+        action = Action.find(params[:id])
+        render json: action, status: :ok
+    end
+
+    def destroy
+        action = Action.find(params[:id])
+        action.destroy
+        head :no_content
+    end
+
+    def update
+        action = Action.find(params[:id])
+        action.update!(action_params)
+        render json: action, status: :ok
+    end
+
     private
 
     def action_params

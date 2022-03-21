@@ -8,8 +8,14 @@ class SkillFeatsController < ApplicationController
     end
     
     def index
-        actions = SkillFeat.find(session[:character_id]).job.skill_feats
-        render json: actions, status: :ok
+        skill_feats = Character.find(session[:character_id]).job.skill_feats
+        render json: skill_feats, status: :ok
+    end
+
+    def destroy
+        skill_feat = SkillFeat.find(params[:id])
+        skill_feat.destroy
+        head :no_content
     end
 
     private

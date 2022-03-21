@@ -3,13 +3,19 @@ class JobFeatsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
     def create
-        action = JobFeat.create!(job_feat_params)
-        render json: action, status: :created
+        job_feat = JobFeat.create!(job_feat_params)
+        render json: job_feat, status: :created
     end
     
     def index
-        actions = JobFeat.find(session[:character_id]).job.job_feats
-        render json: actions, status: :ok
+        job_feats = Character.find(session[:character_id]).job.job_feats
+        render json: job_feats, status: :ok
+    end
+
+    def destroy
+        job_feat = JobFeat.find(params[:id])
+        job_feat.destroy
+        head :no_content
     end
 
     private

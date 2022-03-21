@@ -1,25 +1,28 @@
 Rails.application.routes.draw do
   resources :actions
-  resources :skills
-  resources :backgrounds
-  resources :attributes
+  resources :skills, only: [:create, :index, :destroy]
+  resources :backgrounds, only: [:create, :show, :destroy]
+  resources :attributes, only: [:create, :index, :update, :destroy]
   resources :spell_slots
-  resources :general_feats
-  resources :job_feats
-  resources :skill_feats
+  resources :general_feats, only: [:create, :index, :destroy]
+  resources :job_feats, only: [:create, :index, :destroy]
+  resources :skill_feats, only: [:create, :index, :destroy]
   resources :spells
-  resources :proficiencies
-  resources :jobs
-  resources :ancestry_feats
-  resources :languages
-  resources :ancestries
+  resources :proficiencies, only: [:create, :index, :update, :destroy]
+  resources :jobs, only: [:create, :show, :destroy]
+  resources :ancestry_feats, only: [:create, :index, :destroy]
+  resources :languages, only: [:create, :index, :destroy]
+  resources :ancestries, [:create, :show, :destroy]
   resources :characters
-  resources :users
+  resources :users, [:create, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/hello', to: 'application#hello_world'
+
+  post "/login", to: "sessions#create"
+  get "/me", to: "users#show"
+  delete "/logout", to: "sessions#destroy"
 
   get '*path',
       to: 'fallback#index',
