@@ -15,7 +15,7 @@ class JobFeatsController < ApplicationController
     private
 
     def job_feat_params
-        params.permit( :name, :description, :length, :job_id)
+        params.permit( :name, :description, :level, :job_id)
     end
 
     def show_errors invalid
