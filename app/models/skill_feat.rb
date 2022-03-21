@@ -1,0 +1,2 @@
+class SkillFeat < ApplicationRecord
+end

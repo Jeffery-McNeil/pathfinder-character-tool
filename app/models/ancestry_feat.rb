@@ -1,0 +1,2 @@
+class AncestryFeat < ApplicationRecord
+end

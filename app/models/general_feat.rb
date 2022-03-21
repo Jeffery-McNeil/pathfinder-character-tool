@@ -1,0 +1,2 @@
+class GeneralFeat < ApplicationRecord
+end

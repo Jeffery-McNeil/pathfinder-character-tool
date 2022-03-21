@@ -1,0 +1,2 @@
+class SpellSlot < ApplicationRecord
+end

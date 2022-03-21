@@ -1,0 +1,2 @@
+class AncestriesController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class AncestryFeatsController < ApplicationController
+end

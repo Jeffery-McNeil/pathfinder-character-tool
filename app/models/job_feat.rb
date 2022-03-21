@@ -1,0 +1,2 @@
+class JobFeat < ApplicationRecord
+end
