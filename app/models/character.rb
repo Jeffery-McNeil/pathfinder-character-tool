@@ -12,4 +12,8 @@ class Character < ApplicationRecord
     has_many :languages, through: :ancestry
     has_many :spell_slots, through: :job
     has_many :skills, through: :job
+
+    validates :name, presence: true
+    validates :level, presence: true
+    validates :level, inclusion: { in: 1..20}
 end
