@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   resources :jobs, only: [:create, :show, :destroy]
   resources :ancestry_feats, only: [:create, :index, :destroy]
   resources :languages, only: [:create, :index, :destroy]
-  resources :ancestries, [:create, :show, :destroy]
+  resources :ancestries, only:  [:create, :show, :destroy]
   resources :characters
-  resources :users, [:create, :show]
+  resources :users, only: [:create, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
