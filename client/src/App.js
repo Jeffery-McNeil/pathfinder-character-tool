@@ -2,16 +2,9 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from './Components/Login.js'
 import SignUp from "./Components/Signup.js";
+import MainPage from './Components/MainPage.js'
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -21,6 +14,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/home">
+            <MainPage />
           </Route>
           <Route path="/">
             <Login />
