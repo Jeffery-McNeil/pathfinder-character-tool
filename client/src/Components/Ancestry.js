@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import AncestryCard from "./AncestryCard"
+import '../Css/Ancestry.css'
 
 Modal.setAppElement('#root');
 
@@ -12,12 +14,26 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    width: '80%',
+    height: '80%',
   },
 };
 
 function Ancestry () {
+    const [ancestries, setAncestries] = useState([])
+
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    useEffect(() => {
+      fetch("https://api.pathfinder2.fr/v1/pf2/ancestry", {
+        headers: {
+          Authorization: "da468b89-2bf8-4e2b-a939-79c6e6ef25ce"
+        }
+      }).then(response => response.json())
+      .then((data) => setAncestries(data.results))
+    }, []);
+
   
     function openModal() {
       setIsOpen(true);
@@ -46,14 +62,14 @@ function Ancestry () {
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
           <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+          <div>Choose an Ancestry</div>
+          <div>
+            {ancestries.map((ancestry) => { 
+              return (
+                <AncestryCard key={ancestry._id} ancestry={ancestry}/>
+              )
+            })}
+          </div>
         </Modal>
       </div>
       </>

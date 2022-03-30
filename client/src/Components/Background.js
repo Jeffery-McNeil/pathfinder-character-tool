@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import BackgroundCard from './BackgroundCard'
 
 Modal.setAppElement('#root');
 
@@ -12,10 +13,14 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    height: '80%',
+    width: '80%'
   },
 };
 
 function Background () {
+    const [backgrounds, setBackgrounds] = useState([])
+  
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
   
@@ -31,6 +36,15 @@ function Background () {
     function closeModal() {
       setIsOpen(false);
     }
+
+    useEffect(() => {
+      fetch("https://api.pathfinder2.fr/v1/pf2/background", {
+        headers: {
+          Authorization: "da468b89-2bf8-4e2b-a939-79c6e6ef25ce"
+        }
+      }).then(response => response.json())
+      .then((data) => setBackgrounds(data.results))
+    }, []);
   
     return (
       <>
@@ -44,16 +58,11 @@ function Background () {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Choose a Background</h2>
           <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+          {backgrounds.map((background) => { return(
+            <BackgroundCard key={background.name} background={background} />
+          )})}
         </Modal>
       </div>
       </>

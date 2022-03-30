@@ -1,4 +1,4 @@
-class Attribute < ApplicationRecord
+class Ability_score < ApplicationRecord
     belongs_to :character
     validates :name, inclusion: { in: %w(strength dexterity constitution intelligence wisdom charisma) }
     validates :score, presence: true

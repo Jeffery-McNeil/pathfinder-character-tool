@@ -4,6 +4,7 @@ class CreateBackgrounds < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :description
       t.string :skill
+      t.string :bonus_feat
       t.string :ability_boost_1
       t.string :ability_boost_2
       t.integer :character_id

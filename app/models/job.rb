@@ -7,9 +7,9 @@ class Job < ApplicationRecord
     has_many :spells
     has_many :proficiencies
 
-    validates :name, inclusion: { in: %w( alchemist, barbarian, bard, champion, cleric, druid, fighter, 
-                                        investigator, magus, monk, oracle, ranger, rogue, sorcerer, summoner, 
-                                        swashbuckler, witch, wizard, gunslinger, inventor ) }
-    validates :key_ability, inclusion { in: %w( strength, dexterity, constitution, intelligence, wisdom, charisma )}
-    validates :hit_points, inclusion { in: 1..12 }
+    validates :name, inclusion: { in: %w( Alchemist Barbarian Bard Champion Cleric Druid Fighter 
+                                        Investigator Magus Monk Oracle Ranger Rogue Sorcerer Summoner 
+                                        Swashbuckler Witch Wizard Gunslinger Inventor ) }
+    validates :key_ability, inclusion: { in: %w( Strength Dexterity Constitution Intelligence Wisdom Charisma )}
+    validates :hit_points, inclusion: { in: 1..12 }
 end

@@ -1,26 +1,26 @@
-class AttributesController < ApplicationController
+class Ability_scoresController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :show_errors
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
     def create
-        attribute = Attribute.create!(attribute_params)
+        ability_score = Ability_score.create!(ability_score_params)
         render json: action, status: :created
     end
     
     def index
-        attributes = Character.find(session[:character_id]).attributes
-        render json: attributes, status: :ok
+        ability_scores = Character.find(session[:character_id]).ability_scores
+        render json: ability_scores, status: :ok
     end
 
     def update
-        attribute = Attribute.find(params[:id])
-        attribute.update(media_params[:score, :bonus])
-        render json: attribute, status: :ok
+        ability_score = Ability_score.find(params[:id])
+        ability_score.update(media_params[:score, :bonus])
+        render json: ability_score, status: :ok
     end
 
     private
 
-    def attribute_params
+    def ability_score_params
         params.permit( :name, :score, :bonus, :character_id)
     end
 

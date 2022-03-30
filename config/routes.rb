@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :gears
+  resources :armors
+  resources :weapons
   resources :actions
   resources :skills, only: [:create, :index, :destroy]
-  resources :backgrounds, only: [:create, :show, :destroy]
+  resources :backgrounds, only: [:create, :show, :destroy, :update]
   resources :attributes, only: [:create, :index, :update, :destroy]
   resources :spell_slots
   resources :general_feats, only: [:create, :index, :destroy]

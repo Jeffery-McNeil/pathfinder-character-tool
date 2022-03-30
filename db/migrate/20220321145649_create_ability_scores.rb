@@ -1,6 +1,6 @@
-class CreateAttributes < ActiveRecord::Migration[7.0]
+class CreateAbilityScores < ActiveRecord::Migration[7.0]
   def change
-    create_table :attributes do |t|
+    create_table :ability_scores do |t|
       t.string :name
       t.integer :score
       t.integer :bonus

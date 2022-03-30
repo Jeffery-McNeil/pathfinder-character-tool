@@ -24,7 +24,7 @@ function Login() {
         .then((user) => {
           localStorage.setItem("user", user.id)
           if (Number.isInteger(user.id)) {
-            history.push('/homepage')
+            history.push('/character_select')
           } else {
             setErrorMessage("Invalid username or password")
           }

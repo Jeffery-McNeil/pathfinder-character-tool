@@ -21,7 +21,7 @@ class JobsController < ApplicationController
     private
 
     def job_params
-        params.permit( :name, :level, :user_id)
+        params.permit( :name, :key_ability, :hit_points, :character_id)
     end
 
     def show_errors invalid

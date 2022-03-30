@@ -1,3 +1,3 @@
 class LanguageSerializer < ActiveModel::Serializer
-  attributes :id :name :ancestry_id
+  attributes :id, :name, :ancestry_id
 end

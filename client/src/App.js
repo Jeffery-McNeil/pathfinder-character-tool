@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from './Components/Login.js'
 import SignUp from "./Components/Signup.js";
 import MainPage from './Components/MainPage.js'
+import CharacterSelect from "./Components/CharacterSelect.js";
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path="/home">
+          <Route path="/character_select">
+            <CharacterSelect />
+          </Route>
+          <Route path="/character">
             <MainPage />
           </Route>
           <Route path="/">

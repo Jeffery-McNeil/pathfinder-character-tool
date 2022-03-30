@@ -12,6 +12,12 @@ class BackgroundsController < ApplicationController
         render json: background, status: :ok
     end
 
+    def update 
+        background = Background.find(session[:character_id]).background
+        background.update(background_params)
+        render json: background, status: :ok
+    end
+
     def destroy
         background = Background.find(params[:id])
         background.destroy
@@ -21,7 +27,7 @@ class BackgroundsController < ApplicationController
     private
 
     def background_params
-        params.permit( :name, :description, :skill, :ability_boost_1, :ability_boost_2, :character_id)
+        params.permit( :name, :description, :skill, :bonus_feat, :ability_boost_1, :ability_boost_2, :character_id)
     end
 
     def show_errors invalid

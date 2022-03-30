@@ -1,5 +1,5 @@
 class Character < ApplicationRecord
-    has_many :attributes
+    has_many :ability_scores
     has_one :background
     has_one :job
     has_one :ancestry
