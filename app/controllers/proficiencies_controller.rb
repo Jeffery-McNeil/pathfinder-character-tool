@@ -27,7 +27,7 @@ class ProficienciesController < ApplicationController
     private
 
     def proficiency_params
-        params.permit( :name, :description, :level, :job_id)
+        params.permit( :name, :proficiency_level, :job_id)
     end
 
     def show_errors invalid

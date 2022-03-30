@@ -58,7 +58,7 @@ function Background () {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Choose a Background</h2>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Background</h2>
           <button onClick={closeModal}>close</button>
           {backgrounds.map((background) => { return(
             <BackgroundCard key={background.name} background={background} />

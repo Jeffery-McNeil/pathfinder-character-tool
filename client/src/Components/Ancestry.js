@@ -60,9 +60,8 @@ function Ancestry () {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Ancestry</h2>
           <button onClick={closeModal}>close</button>
-          <div>Choose an Ancestry</div>
           <div>
             {ancestries.map((ancestry) => { 
               return (

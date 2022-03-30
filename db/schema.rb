@@ -135,7 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_201251) do
 
   create_table "proficiencies", force: :cascade do |t|
     t.string "name"
-    t.string "proiciency_level"
+    t.string "proficiency_level"
     t.integer "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

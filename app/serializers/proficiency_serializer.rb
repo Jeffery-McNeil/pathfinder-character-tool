@@ -1,3 +1,3 @@
 class ProficiencySerializer < ActiveModel::Serializer
-  attributes :id, :name, :proiciency_level, :job_id
+  attributes :id, :name, :proficiency_level, :job_id
 end
