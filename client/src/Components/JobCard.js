@@ -2,17 +2,15 @@ import { useState } from 'react'
 import parse from 'html-react-parser';
 import { filter } from 'domutils';
 
-function JobCard ({ job }) {
+function JobCard ({ job, update }) {
     const [show, setShow] = useState(false)
-
-    console.log(job)
-    console.log(job.data.savingThrows)
 
     function handleClick() {
         setShow(!show)
     }
 
     function handleSelect() {
+        update()
         const jobChoice = {
             name: job.name,
             key_ability: abilityName(job.data.keyAbility.value[0]),
@@ -20,71 +18,9 @@ function JobCard ({ job }) {
             character_id: localStorage.getItem('characterId')    
         }
 
-        const savesArr = Object.entries(job.data.savingThrows)
-        const attacksArr = Object.entries(job.data.attacks)
-        const defensesArr = Object.entries(job.data.defenses)
-
-        const filteredAttacksArr = attacksArr.filter(function ([key, value]) {
-            return key !== 'other';
-        })
-
-        console.log(filteredAttacksArr)
-
-        savesArr.map((save)=> {
-
-            const newSave = {
-                name: save[0],
-                proficiency_level: proficiency(save[1]),
-                job_id: 1
-            }
-            
-            fetch('/proficiencies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newSave)
-            }).then((response)=> response.json())
-            .then((data)=> console.log(data))
-
-        })
-
-        filteredAttacksArr.map((attack)=> {
-            
-            const newAttack = {
-                name: attack[0],
-                proficiency_level: proficiency(attack[1]),
-                job_id: 1
-            }
-            
-            fetch('/proficiencies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newAttack)
-            }).then((response)=> response.json())
-            .then((data)=> console.log(data))
-
-        })
-
-        defensesArr.map((defense)=> {
-
-            const newDefense = {
-                name: defense[0],
-                proficiency_level: proficiency(defense[1]),
-                job_id: 1
-            }
-            
-            fetch('/proficiencies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newDefense)
-            }).then((response)=> response.json())
-            .then((data)=> console.log(data))
-
+    
+        fetch(`/jobs/${localStorage.getItem('characterId')}`, {
+            method: 'DELETE'
         })
 
         fetch('/jobs', {
@@ -94,7 +30,74 @@ function JobCard ({ job }) {
             },
             body: JSON.stringify(jobChoice)
         }).then((response)=> response.json())
-        .then((data)=> console.log(data))
+        .then((newJob)=> {
+
+            const savesArr = Object.entries(job.data.savingThrows)
+            const attacksArr = Object.entries(job.data.attacks)
+            const defensesArr = Object.entries(job.data.defenses)
+
+            const filteredAttacksArr = attacksArr.filter(function ([key, value]) {
+                return key !== 'other';
+            })
+
+            savesArr.map((save)=> {
+
+                const newSave = {
+                    name: save[0],
+                    proficiency_level: proficiency(save[1]),
+                    job_id: newJob.id
+                }
+                
+                fetch('/proficiencies', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newSave)
+                }).then((response)=> response.json())
+                .then((data)=> console.log(data))
+    
+            })
+    
+            filteredAttacksArr.map((attack)=> {
+                
+                const newAttack = {
+                    name: attack[0],
+                    proficiency_level: proficiency(attack[1]),
+                    job_id: newJob.id
+                }
+                
+                fetch('/proficiencies', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newAttack)
+                }).then((response)=> response.json())
+                .then((data)=> console.log(data))
+    
+            })
+    
+            defensesArr.map((defense)=> {
+    
+                const newDefense = {
+                    name: defense[0],
+                    proficiency_level: proficiency(defense[1]),
+                    job_id: newJob.id
+                }
+                
+                fetch('/proficiencies', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newDefense)
+                }).then((response)=> response.json())
+                .then((data)=> console.log(data))
+    
+            })
+            
+        })
 
         
     }

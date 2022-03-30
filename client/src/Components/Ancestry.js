@@ -19,7 +19,7 @@ const customStyles = {
   },
 };
 
-function Ancestry () {
+function Ancestry ({ update }) {
     const [ancestries, setAncestries] = useState([])
 
     let subtitle;
@@ -47,7 +47,7 @@ function Ancestry () {
     function closeModal() {
       setIsOpen(false);
     }
-  
+
     return (
       <>
       <div id="main"></div>
@@ -65,7 +65,7 @@ function Ancestry () {
           <div>
             {ancestries.map((ancestry) => { 
               return (
-                <AncestryCard key={ancestry._id} ancestry={ancestry}/>
+                <AncestryCard key={ancestry._id} ancestry={ancestry} update={update}/>
               )
             })}
           </div>

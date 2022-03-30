@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Abilities from "./Abilities";
 import Ancestry from "./Ancestry";
 import Background from "./Background";
@@ -9,14 +10,41 @@ import Skills from "./Skills";
 
 
 function MainPage() {
+  const [character, setCharacter] = useState([])
+  const [ancestry, setAncestry] = useState([])
+  const [background, setBackground] = useState([])
+  const [job, setJob] = useState([])
+  const [toggle, setToggle] = useState([])
+
+  useEffect(()=> {
+      fetch((`./characters/${localStorage.getItem('characterId')}`))
+      .then((response)=> response.json())
+      .then((data)=> setCharacter(data))
+
+      fetch((`./ancestries/${localStorage.getItem('characterId')}`))
+      .then((response)=> response.json())
+      .then((data)=> setAncestry(data))
+
+      fetch((`./backgrounds/${localStorage.getItem('characterId')}`))
+      .then((response)=> response.json())
+      .then((data)=> setBackground(data))
+
+      fetch((`./jobs/${localStorage.getItem('characterId')}`))
+      .then((response)=> response.json())
+      .then((data)=> setJob(data))
+
+  }, [toggle])
   
+  function update() {
+    setToggle(!toggle)
+  }
   
   return (
     <>
       <div>
-        <Ancestry/>
-        <Background/>
-        <Job />
+        <Ancestry update={update}/>
+        <Background update={update}/>
+        <Job update={update}/>
       </div>
       <div>
         <div>
@@ -26,7 +54,7 @@ function MainPage() {
         </div>
       </div>
       <div>
-        <CharacterSheet/>
+        <CharacterSheet character={character} ancestry={ancestry} background={background} job={job}/>
       </div>
     </>
   )

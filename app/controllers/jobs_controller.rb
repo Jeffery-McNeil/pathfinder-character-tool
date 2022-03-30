@@ -8,12 +8,12 @@ class JobsController < ApplicationController
     end
 
     def show
-        job = job.find(params[:id])
+        job = Character.find(params[:id]).job
         render json: job, status: :ok
     end
 
     def destroy
-        job = Job.find(params[:id])
+        job = Character.find(params[:id]).job
         job.destroy
         head :no_content
     end

@@ -5,13 +5,12 @@ import SkillList from "./SkillList"
 import Equipment from "./Equipment"
 
 
-function CharacterSheet () {
-
+function CharacterSheet ({ character, ancestry, background, job}) {
     return (
         <div>
-            <Basics/>
-            <Defenses/>
-            <UsefulInfo/>
+            <Basics character={character} ancestry={ancestry} background={background} job={job}/>
+            <Defenses job={job}/>
+            <UsefulInfo job={job}/>
             <SkillList/>
             <Equipment/>
         </div>

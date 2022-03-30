@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { show } from 'react-modal/lib/helpers/ariaAppHider';
 import AncestryFeature from './AncestryFeature';
 
 
-function AncestryCard ( ancestry ) {
+function AncestryCard ({ ancestry, update }) {
     const [show, setShow] = useState(false)
 
     let size
@@ -11,7 +10,7 @@ function AncestryCard ( ancestry ) {
     let vision
     let visionType
 
-    switch (ancestry.ancestry.data.vision) {
+    switch (ancestry.data.vision) {
         case "lowLightVision" : {
             vision = "A creature with low-light vision can see in dim light as though it were bright light, so it ignores the Concealed condition due to dim light."
             visionType = "Low-Light Vision"
@@ -25,18 +24,18 @@ function AncestryCard ( ancestry ) {
         default : visionType = undefined
     }
 
-    if (ancestry.ancestry.name === "Automaton") {
+    if (ancestry.name === "Automaton") {
         ( size = "Small or Medium" )
-    } else if (ancestry.ancestry.data.size === 'med') {
+    } else if (ancestry.data.size === 'med') {
         ( size = "Medium" )
     } else {
         ( size = "Small")
     }
 
-    if (ancestry.ancestry.data.boosts[1].value.length >= 1) {
-        abilityBoosts = `${abilityName(ancestry.ancestry.data.boosts[0].value[0])}, ${abilityName(ancestry.ancestry.data.boosts[1].value[0])}, Free`
+    if (ancestry.data.boosts[1].value.length >= 1) {
+        abilityBoosts = `${abilityName(ancestry.data.boosts[0].value[0])}, ${abilityName(ancestry.data.boosts[1].value[0])}, Free`
     } else {
-        abilityBoosts = `${abilityName(ancestry.ancestry.data.boosts[0].value[0])}, Free`
+        abilityBoosts = `${abilityName(ancestry.data.boosts[0].value[0])}, Free`
     }
 
     function abilityName (arg) {
@@ -59,18 +58,22 @@ function AncestryCard ( ancestry ) {
     }
 
     function handleSelect() {
-    console.log(ancestry.ancestry.data.boosts[0].value[1])
-        
+        update()
+
         const ancestryChoice = {
-            name: ancestry.ancestry.name,
-            hit_points: ancestry.ancestry.data.hp,
-            size: ancestry.ancestry.data.size,
-            speed: ancestry.ancestry.data.speed,
-            ability_boost_1: ancestry.ancestry.data.boosts[0].value[0],
-            ability_boost_2: ancestry.ancestry.data.boosts[1].value[0],
-            ability_flaw: ancestry.ancestry.data.flaws[0].value[0],
+            name: ancestry.name,
+            hit_points: ancestry.data.hp,
+            size: ancestry.data.size,
+            speed: ancestry.data.speed,
+            ability_boost_1: ancestry.data.boosts[0].value[0],
+            ability_boost_2: ancestry.data.boosts[1].value[0],
+            ability_flaw: ancestry.data.flaws[0].value[0],
             character_id: 1
         }
+
+        fetch(`./ancestries/${localStorage.getItem('characterId')}`, {
+            method: 'DELETE'
+        })
 
         fetch('/ancestries', {
             method: 'POST',
@@ -85,18 +88,18 @@ function AncestryCard ( ancestry ) {
 
     if (show === true) { return (
             <article>
-                <h1 onClick={handleClick}>{ancestry.ancestry.name}</h1>
+                <h1 onClick={handleClick}>{ancestry.name}</h1>
                 <div>
-                    <p>Hit Points: {ancestry.ancestry.data.hp}</p>
+                    <p>Hit Points: {ancestry.data.hp}</p>
                     <p>Size: {size}</p>
-                    <p>Speed: {ancestry.ancestry.data.speed}</p>
+                    <p>Speed: {ancestry.data.speed}</p>
                     <p>Ability Boosts: {abilityBoosts}</p>
-                    <p>{ancestry.ancestry.data.flaws[0].value[0] ?  `Ability Flaw: ${abilityName(ancestry.ancestry.data.flaws[0].value[0])}` : null}</p>
-                    <p>{ancestry.ancestry.data.languages.value[1] ? `Languages: ${capitalizeFirstLetter(ancestry.ancestry.data.languages.value[0])}, ${capitalizeFirstLetter(ancestry.ancestry.data.languages.value[1])}. Additional languages equal to your Intelligence modifier (if it’s positive). Choose from: ${ancestry.ancestry.data.additionalLanguages.value.map((language)=> {return ` ${capitalizeFirstLetter(language)}` })}` : null}</p>
+                    <p>{ancestry.data.flaws[0].value[0] ?  `Ability Flaw: ${abilityName(ancestry.data.flaws[0].value[0])}` : null}</p>
+                    <p>{ancestry.data.languages.value[1] ? `Languages: ${capitalizeFirstLetter(ancestry.data.languages.value[0])}, ${capitalizeFirstLetter(ancestry.data.languages.value[1])}. Additional languages equal to your Intelligence modifier (if it’s positive). Choose from: ${ancestry.data.additionalLanguages.value.map((language)=> {return ` ${capitalizeFirstLetter(language)}` })}` : null}</p>
                     <p>{visionType ? `${visionType}: ${vision}` : null}</p>
-                    {ancestry.ancestry.data.items ? Object.keys(ancestry.ancestry.data.items).map(function(key, index) {
+                    {ancestry.data.items ? Object.keys(ancestry.data.items).map(function(key, index) {
                         return (
-                            <AncestryFeature key={ancestry.ancestry.data.items[key].name} item={ancestry.ancestry.data.items[key]}/>
+                            <AncestryFeature key={ancestry.data.items[key].name} item={ancestry.data.items[key]}/>
                         );
                     }) : null}
                 </div>
@@ -104,7 +107,7 @@ function AncestryCard ( ancestry ) {
             </article>
     )} else { return (
             <article>
-                <h1 onClick={handleClick}>{ancestry.ancestry.name}</h1>
+                <h1 onClick={handleClick}>{ancestry.name}</h1>
             </article>
     )}}
 

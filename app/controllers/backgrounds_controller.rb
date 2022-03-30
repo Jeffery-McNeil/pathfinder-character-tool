@@ -4,11 +4,11 @@ class BackgroundsController < ApplicationController
 
     def create
         background = Background.create!(background_params)
-        render json: action, status: :created
+        render json: background, status: :created
     end
     
     def show
-        background = Character.find(session[:character_id]).background
+        background = Character.find(params[:id]).background
         render json: background, status: :ok
     end
 
@@ -19,7 +19,7 @@ class BackgroundsController < ApplicationController
     end
 
     def destroy
-        background = Background.find(params[:id])
+        background = Character.find(params[:id]).background
         background.destroy
         head :no_content
     end

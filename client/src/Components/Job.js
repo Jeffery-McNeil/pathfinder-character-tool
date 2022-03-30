@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-function Background () {
+function Background ({ update }) {
     const [jobs, setJobs] = useState([])
 
     let subtitle;
@@ -61,7 +61,7 @@ function Background () {
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Class</h2>
           <button onClick={closeModal}>close</button>
           {jobs.map((job)=> { return(
-            <JobCard key={job.name} job={job}/>
+            <JobCard key={job.name} job={job} update={update}/>
           )})}
         </Modal>
       </div>

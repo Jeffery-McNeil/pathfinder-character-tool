@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import parse from 'html-react-parser';
 
-function BackgroundCard ({ background }) {
+function BackgroundCard ({ background, update }) {
     const [show, setShow] = useState(false)
 
     function handleClick() {
@@ -9,12 +9,21 @@ function BackgroundCard ({ background }) {
     }
 
     function handleSelect () {
+        update()
+
         const backgroundChoice = {
             name: background.name,
             skill: skillName(background.data.trainedSkills.value[0]),
             bonus_feat: background.data.items[Object.keys(background.data.items)[0]].id,
+            ability_boost_1: abilityName(background.data.boosts[0].value[0]),
+            ability_boost_2: abilityName(background.data.boosts[0].value[1]),
             character_id: localStorage.getItem('characterId')
+            
         }
+
+        fetch(`/backgrounds/${localStorage.getItem('characterId')}`, {
+            method: 'DELETE'
+        })
 
         fetch('/backgrounds', {
             method: 'POST',

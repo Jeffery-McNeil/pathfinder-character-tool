@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-function Background () {
+function Background ({ update }) {
     const [backgrounds, setBackgrounds] = useState([])
   
     let subtitle;
@@ -61,7 +61,7 @@ function Background () {
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Background</h2>
           <button onClick={closeModal}>close</button>
           {backgrounds.map((background) => { return(
-            <BackgroundCard key={background.name} background={background} />
+            <BackgroundCard key={background.name} background={background} update={update}/>
           )})}
         </Modal>
       </div>

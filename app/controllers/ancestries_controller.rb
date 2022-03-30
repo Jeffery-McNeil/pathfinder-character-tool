@@ -8,12 +8,12 @@ class AncestriesController < ApplicationController
     end
     
     def show
-        ancestry = Character.find(session[:character_id]).ancestry
+        ancestry = Character.find(params[:id]).ancestry
         render json: ancestry, status: :ok
     end
 
     def destroy
-        ancestry = Ancestry.find(params[:id])
+        ancestry = Character.find(params[:id]).ancestry
         ancestry.destroy
         head :no_content
     end
