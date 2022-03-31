@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :actions
   resources :skills, only: [:create, :index, :destroy]
   resources :backgrounds, only: [:create, :show, :destroy, :update]
-  resources :attributes, only: [:create, :index, :update, :destroy]
+  resources :ability_scores, only: [:create, :index, :update, :destroy]
   resources :spell_slots
   resources :general_feats, only: [:create, :index, :destroy]
   resources :job_feats, only: [:create, :index, :destroy]
   resources :skill_feats, only: [:create, :index, :destroy]
   resources :spells
-  resources :proficiencies, only: [:create, :index, :update, :destroy]
+  resources :proficiencies, only: [:create, :index, :destroy]
   resources :jobs, only: [:create, :show, :destroy]
   resources :ancestry_feats, only: [:create, :index, :destroy]
   resources :languages, only: [:create, :index, :destroy]
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  get '/character_select/:name', to: "sessions#character_show"
   post "/login", to: "sessions#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"

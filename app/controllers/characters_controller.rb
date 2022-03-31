@@ -4,6 +4,7 @@ class CharactersController < ApplicationController
 
     def create
         character = Character.create!(character_params)
+        session[:character_id] = character.id
         render json: character, status: :created
     end
     

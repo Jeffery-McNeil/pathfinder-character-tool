@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import parse from 'html-react-parser';
-import { filter } from 'domutils';
 
 function JobCard ({ job, update }) {
     const [show, setShow] = useState(false)
+
+    console.log(job)
 
     function handleClick() {
         setShow(!show)
@@ -13,13 +13,17 @@ function JobCard ({ job, update }) {
         update()
         const jobChoice = {
             name: job.name,
-            key_ability: abilityName(job.data.keyAbility.value[0]),
+            key_abilities: job.data.keyAbility.value[0],
             hit_points: job.data.hp,
             character_id: localStorage.getItem('characterId')    
         }
 
     
         fetch(`/jobs/${localStorage.getItem('characterId')}`, {
+            method: 'DELETE'
+        })
+
+        fetch(`/proficiencies`, {
             method: 'DELETE'
         })
 
@@ -32,6 +36,22 @@ function JobCard ({ job, update }) {
         }).then((response)=> response.json())
         .then((newJob)=> {
 
+            const perception = {
+                name: 'perception',
+                proficiency_level: proficiency(job.data.perception),
+                job_id: newJob.id
+            }
+
+            fetch('/proficiencies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(perception)
+            }).then((response)=> response.json())
+            .then((data)=> console.log(data))
+
+
             const savesArr = Object.entries(job.data.savingThrows)
             const attacksArr = Object.entries(job.data.attacks)
             const defensesArr = Object.entries(job.data.defenses)
@@ -41,13 +61,12 @@ function JobCard ({ job, update }) {
             })
 
             savesArr.map((save)=> {
-
                 const newSave = {
                     name: save[0],
                     proficiency_level: proficiency(save[1]),
                     job_id: newJob.id
                 }
-                
+                return (
                 fetch('/proficiencies', {
                     method: 'POST',
                     headers: {
@@ -56,6 +75,7 @@ function JobCard ({ job, update }) {
                     body: JSON.stringify(newSave)
                 }).then((response)=> response.json())
                 .then((data)=> console.log(data))
+                )
     
             })
     
@@ -67,6 +87,7 @@ function JobCard ({ job, update }) {
                     job_id: newJob.id
                 }
                 
+                return (
                 fetch('/proficiencies', {
                     method: 'POST',
                     headers: {
@@ -75,6 +96,7 @@ function JobCard ({ job, update }) {
                     body: JSON.stringify(newAttack)
                 }).then((response)=> response.json())
                 .then((data)=> console.log(data))
+                )
     
             })
     
@@ -86,6 +108,7 @@ function JobCard ({ job, update }) {
                     job_id: newJob.id
                 }
                 
+                return (
                 fetch('/proficiencies', {
                     method: 'POST',
                     headers: {
@@ -94,6 +117,7 @@ function JobCard ({ job, update }) {
                     body: JSON.stringify(newDefense)
                 }).then((response)=> response.json())
                 .then((data)=> console.log(data))
+                )
     
             })
             
@@ -160,7 +184,7 @@ function JobCard ({ job, update }) {
         <article>
             <h1 onClick={handleClick}>{job.name}</h1>
             <p>{job.data.description.value.match(/<em>(.*?)</i)[1]}</p>
-            <p><strong>Key Ability</strong> {abilityName(job.data.keyAbility.value[0])}</p>
+            <p><strong>Key Ability</strong> {job.data.keyAbility.value.map((ability)=> {return (` ${abilityName(ability)}`)})}</p>
             <p><strong>Hit Points</strong> {job.data.hp} plus Constitution Modifier</p>
             <p><strong>{proficiency(job.data.perception)}</strong> Perception</p>
             {job.name === "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.savingThrows, 2)}</p> : <p><strong>Trained</strong> {proficiencies(job.data.savingThrows, 1)}</p>}

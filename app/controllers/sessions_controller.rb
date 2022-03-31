@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       end
     end
 
-    def character_create
+    def character_show
         character = Character.find_by(name: params[:name])
         session[:character_id] = character.id
         render json: character, status: :created

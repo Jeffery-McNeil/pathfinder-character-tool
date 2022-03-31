@@ -14,6 +14,8 @@ function MainPage() {
   const [ancestry, setAncestry] = useState([])
   const [background, setBackground] = useState([])
   const [job, setJob] = useState([])
+  const [abilityScores, setAbilityScores] = useState([])
+  const [proficiencies, setProficiencies] = useState([])
   const [toggle, setToggle] = useState([])
 
   useEffect(()=> {
@@ -33,6 +35,14 @@ function MainPage() {
       .then((response)=> response.json())
       .then((data)=> setJob(data))
 
+      fetch((`./ability_scores`))
+      .then((response)=> response.json())
+      .then((data)=> setAbilityScores(data))
+
+      fetch ((`./proficiencies`))
+      .then((response)=> response.json())
+      .then((data)=> setProficiencies(data))
+
   }, [toggle])
   
   function update() {
@@ -49,12 +59,12 @@ function MainPage() {
       <div>
         <div>
           <h3>Level 1</h3>
-          <Abilities/>
+          <Abilities ancestry={ancestry} background={background} job={job}/>
           <Skills />
         </div>
       </div>
       <div>
-        <CharacterSheet character={character} ancestry={ancestry} background={background} job={job}/>
+        <CharacterSheet character={character} ancestry={ancestry} background={background} job={job} abilityScores={abilityScores} proficiencies={proficiencies}/>
       </div>
     </>
   )

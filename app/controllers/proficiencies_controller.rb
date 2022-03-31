@@ -19,8 +19,8 @@ class ProficienciesController < ApplicationController
     end
 
     def destroy
-        proficiency = Proficiency.find(params[:id])
-        proficiency.destroy
+        proficiencies = Character.find(session[:character_id]).job.proficiencies
+        proficiencies.destroy
         head :no_content
     end
 

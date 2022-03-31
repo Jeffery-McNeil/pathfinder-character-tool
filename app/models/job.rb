@@ -10,6 +10,5 @@ class Job < ApplicationRecord
     validates :name, inclusion: { in: %w( Alchemist Barbarian Bard Champion Cleric Druid Fighter 
                                         Investigator Magus Monk Oracle Ranger Rogue Sorcerer Summoner 
                                         Swashbuckler Witch Wizard Gunslinger Inventor ) }
-    validates :key_ability, inclusion: { in: %w( Strength Dexterity Constitution Intelligence Wisdom Charisma )}
     validates :hit_points, inclusion: { in: 1..12 }
 end

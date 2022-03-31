@@ -1,9 +1,7 @@
 import Ancestry from "./Ancestry";
 
-function Basics ({ character, ancestry, background, job }) {
-    let size
+function Basics ({ character, ancestry, background, job, abilityScores }) {
 
-    
     function sizeName(arg) {
         switch (arg) {
             case 'sma' : return "Small"
@@ -31,12 +29,12 @@ function Basics ({ character, ancestry, background, job }) {
             </div>
             <p>Size: {ancestry ? sizeName(ancestry.size) : null}</p>
             <p>Speed: {ancestry ? ancestry.speed : null}</p>
-            <p>STR</p>
-            <p>DEX</p>
-            <p>CON</p>
-            <p>INT</p>
-            <p>WIS</p>
-            <p>CHA</p>
+            <p>STR {abilityScores.length ? (abilityScores.find(element => element.name === 'Strength').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Strength').bonus) : null}</p>
+            <p>DEX {abilityScores.length ? (abilityScores.find(element => element.name === 'Dexterity').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Dexterity').bonus) : null}</p>
+            <p>CON {abilityScores.length ? (abilityScores.find(element => element.name === 'Constitution').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Constitution').bonus) : null}</p>
+            <p>INT {abilityScores.length ? (abilityScores.find(element => element.name === 'Intelligence').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Intelligence').bonus) : null}</p>
+            <p>WIS {abilityScores.length ? (abilityScores.find(element => element.name === 'Widsom').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Widsom').bonus) : null}</p>
+            <p>CHA {abilityScores.length ? (abilityScores.find(element => element.name === 'Charisma').score) : null} | + {abilityScores.length ? (abilityScores.find(element => element.name === 'Charisma').bonus) : null}</p>
         </div>
     )
 }

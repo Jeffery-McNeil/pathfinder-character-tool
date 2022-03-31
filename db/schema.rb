@@ -119,7 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_201251) do
 
   create_table "jobs", force: :cascade do |t|
     t.string "name"
-    t.string "key_ability"
+    t.text "key_abilities"
     t.integer "hit_points"
     t.integer "character_id"
     t.datetime "created_at", null: false

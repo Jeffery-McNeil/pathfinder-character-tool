@@ -5,8 +5,11 @@ function CharacterCard ({ character }) {
     const history = useHistory()
 
     function handleClick () {
+
         localStorage.setItem('characterId', character.id)
         history.push('./character')
+
+        fetch(`/character_select/:${character.name}`)
     }
     
     return (
