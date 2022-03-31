@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import JobChoice from './JobChoice';
+import '../Css/Abilities.css'
 
 Modal.setAppElement('#root');
 
@@ -12,6 +13,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    backgroundColor: '#39525C'
   },
 };
 
@@ -45,7 +47,6 @@ function Abilities ({ ancestry, background, job }) {
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
     }
   
     function closeModal() {
@@ -169,7 +170,7 @@ function Abilities ({ ancestry, background, job }) {
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Abilities</h2>
           <div>
             <h3>Ancestry</h3>
-              <select onChange={ancestryChoice}>
+              <select className="ability-select" onChange={ancestryChoice}>
                 <option>Choose ability</option>
                 {filteredAbility.map((choice)=> { return (
                     <option value={choice} key={choice} name={choice}>{choice}</option>
@@ -180,12 +181,12 @@ function Abilities ({ ancestry, background, job }) {
               <p>+ {ancestry ? abilityName(ancestry.ability_boost_2) : null}</p>
               <p>- {ancestry ? abilityName(ancestry.ability_flaw) : null}</p>
             <h3>Background</h3>
-              <select onChange={backgroundChoiceOne}>
+              <select className="ability-select" onChange={backgroundChoiceOne}>
                 <option>Choose ability</option>
                 <option value={background ? background.ability_boost_1 : null}>{background ? background.ability_boost_1 : null}</option>
                 <option value={background ? background.ability_boost_2 : null}>{background ? background.ability_boost_2 : null}</option>
               </select>
-              <select onChange={backgroundChoiceTwo}>
+              <select className="ability-select" onChange={backgroundChoiceTwo}>
                 <option>Choose ability</option>
                 {filteredBackground.map((choice)=> { return (
                       <option value={choice} key={choice}>{choice}</option>
@@ -205,8 +206,7 @@ function Abilities ({ ancestry, background, job }) {
               
 
           </div>
-          <button onClick={handleClick}>Select</button>
-          <button onClick={closeModal}>close</button>
+          <button id='ability-button' onClick={handleClick}>Select</button>
           
         </Modal>
       </div>

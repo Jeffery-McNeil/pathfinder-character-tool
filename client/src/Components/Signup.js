@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom'
+import '../Css/Signup.css'
 
 function SignUp() {
     const [username, setUsername] = useState("");

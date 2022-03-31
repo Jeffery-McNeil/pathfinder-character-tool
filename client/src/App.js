@@ -10,9 +10,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
-          </Route>
           <Route path="/signup">
             <SignUp />
           </Route>

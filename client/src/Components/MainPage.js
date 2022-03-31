@@ -5,6 +5,7 @@ import Background from "./Background";
 import CharacterSheet from "./CharacterSheet";
 import Job from "./Job"
 import Skills from "./Skills";
+import '../Css/MainPage.css'
 
 
 
@@ -50,7 +51,7 @@ function MainPage() {
   }
   
   return (
-    <>
+    <div className='mainpage-bg-layer'>
       <div>
         <Ancestry update={update}/>
         <Background update={update}/>
@@ -58,15 +59,14 @@ function MainPage() {
       </div>
       <div>
         <div>
-          <h3>Level 1</h3>
           <Abilities ancestry={ancestry} background={background} job={job}/>
           <Skills />
         </div>
       </div>
-      <div>
+      <div className='character-sheet'>
         <CharacterSheet character={character} ancestry={ancestry} background={background} job={job} abilityScores={abilityScores} proficiencies={proficiencies}/>
       </div>
-    </>
+    </div>
   )
 }
 

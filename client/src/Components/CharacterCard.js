@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom'
+import '../Css/CharacterSelect.css'
 
 function CharacterCard ({ character }) {
     
@@ -13,9 +14,11 @@ function CharacterCard ({ character }) {
     }
     
     return (
-        <article>
-            <h1 onClick={handleClick}>{character.name}</h1>
-            <h4>Level: {character.level}</h4>
+        <article className='character-card'>
+            <div className='character-text' onClick={handleClick}>
+                <h1 >{character.name}</h1>
+                <h4>Level: {character.level}</h4>
+            </div>
         </article>
     )
 }

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom"
 import Modal from 'react-modal';
+import '../Css/CharacterSelect.css'
 
 Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
+    height: '50%',
+    width: '50%',
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    backgroundColor: '#39525C'
   },
 };
 
-function CreateCharacter () {
+function CreateCharacter ({ onCreate }) {
     const [formData, setFormData] = useState({
         name: "",
         level: 1,
@@ -33,7 +37,7 @@ function CreateCharacter () {
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
+      subtitle.style.color = 'black';
     }
   
     function closeModal() {
@@ -51,7 +55,7 @@ function CreateCharacter () {
 
     function onSubmit (event) {
         event.preventDefault();
-
+        onCreate()
         handleSubmit(event, formData)
     }
 
@@ -65,14 +69,13 @@ function CreateCharacter () {
             body: JSON.stringify(newItem)
         }).then((response)=> response.json())
         .then((data)=> localStorage.setItem('characterId', `${data.id}`))
-        history.push('./character')
     }
   
     return (
       <>
       <div id="main"></div>
       <div>
-        <button className="button" onClick={openModal}>Create a new Character</button>
+        <button id='create' onClick={openModal}>Create a new Character</button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -81,13 +84,13 @@ function CreateCharacter () {
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Create a Character</h2>
-          <button onClick={closeModal}>close</button>
           <form onSubmit={onSubmit}>
-            <label>
+            <div>
                 Name:
                 <input type="text" name="name" value={formData.name} onChange={handleChange}/>
-            </label>
-            <select name="level" value={formData.level} onChange={handleChange}>
+            </div>
+            <select className="select" name="level" value={formData.level} onChange={handleChange}>
+                <option></option>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -109,7 +112,8 @@ function CreateCharacter () {
                 <option value={19}>19</option>
                 <option value={20}>20</option>
             </select>
-            <input type="submit" value="Submit"/>
+            <input id="create-submit" type="submit" value="Submit"/>
+            <button className="close" onClick={closeModal}>close</button>
           </form>
         </Modal>
       </div>

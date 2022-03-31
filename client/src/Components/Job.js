@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import JobCard from './JobCard';
+import '../Css/Job.css'
 
 Modal.setAppElement('#root');
 
@@ -14,7 +15,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     height: '80%',
-    width: '80%'
+    width: '80%',
+    backgroundColor: '#39525C'
   },
 };
 
@@ -39,7 +41,6 @@ function Background ({ update }) {
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
     }
   
     function closeModal() {
@@ -59,10 +60,11 @@ function Background ({ update }) {
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Class</h2>
-          <button onClick={closeModal}>close</button>
-          {jobs.map((job)=> { return(
-            <JobCard key={job.name} job={job} update={update}/>
-          )})}
+          <div className='job-container'>
+            {jobs.map((job)=> { return(
+              <JobCard key={job.name} job={job} update={update}/>
+            )})}
+          </div>
         </Modal>
       </div>
       </>

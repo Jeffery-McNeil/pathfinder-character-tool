@@ -183,19 +183,19 @@ function JobCard ({ job, update }) {
     if (show === true) { return (
         <article>
             <h1 onClick={handleClick}>{job.name}</h1>
-            <p>{job.data.description.value.match(/<em>(.*?)</i)[1]}</p>
-            <p><strong>Key Ability</strong> {job.data.keyAbility.value.map((ability)=> {return (` ${abilityName(ability)}`)})}</p>
-            <p><strong>Hit Points</strong> {job.data.hp} plus Constitution Modifier</p>
-            <p><strong>{proficiency(job.data.perception)}</strong> Perception</p>
-            {job.name === "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.savingThrows, 2)}</p> : <p><strong>Trained</strong> {proficiencies(job.data.savingThrows, 1)}</p>}
-            {job.name !== "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.savingThrows, 2)}</p> : null}
-            <p><strong>Trained</strong> in a number of skills equal to {job.data.trainedSkills.additional} plus your intelligence modifier. Trained in{job.data.trainedSkills.value.map((skill)=> {return (` ${skillName(skill)}`)})}</p>
-            <p><strong>Trained</strong> {proficiencies(job.data.attacks, 1)}{job.data.attacks.other.name ? `, plus ${job.data.attacks.other.name}` : null}</p>
-            {job.name === "Fighter" ? <p><strong>Expert</strong> {proficiencies(job.data.attacks, 2)}</p> : null}
-            {job.name === "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.defenses, 2)}</p> : <p><strong>Trained</strong> {proficiencies(job.data.defenses, 1)}</p>}
-            <button onClick={handleSelect}>Select</button>
-            
-
+            <div className='job-card'>
+                <p>{job.data.description.value.match(/<em>(.*?)</i)[1]}</p>
+                <p><strong>Key Ability</strong> {job.data.keyAbility.value.map((ability)=> {return (` ${abilityName(ability)}`)})}</p>
+                <p><strong>Hit Points</strong> {job.data.hp} plus Constitution Modifier</p>
+                <p><strong>{proficiency(job.data.perception)}</strong> Perception</p>
+                {job.name === "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.savingThrows, 2)}</p> : <p><strong>Trained</strong> {proficiencies(job.data.savingThrows, 1)}</p>}
+                {job.name !== "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.savingThrows, 2)}</p> : null}
+                <p><strong>Trained</strong> in a number of skills equal to {job.data.trainedSkills.additional} plus your intelligence modifier. Trained in{job.data.trainedSkills.value.map((skill)=> {return (` ${skillName(skill)}`)})}</p>
+                <p><strong>Trained</strong> {proficiencies(job.data.attacks, 1)}{job.data.attacks.other.name ? `, plus ${job.data.attacks.other.name}` : null}</p>
+                {job.name === "Fighter" ? <p><strong>Expert</strong> {proficiencies(job.data.attacks, 2)}</p> : null}
+                {job.name === "Monk" ? <p><strong>Expert</strong> {proficiencies(job.data.defenses, 2)}</p> : <p><strong>Trained</strong> {proficiencies(job.data.defenses, 1)}</p>}
+            </div>
+            <button id="job-select" onClick={handleSelect}>Select</button>
         </article>
     )} else { return (
             <article>

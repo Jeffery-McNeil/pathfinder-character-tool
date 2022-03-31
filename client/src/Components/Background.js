@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import BackgroundCard from './BackgroundCard'
+import '../Css/Background.css'
 
 Modal.setAppElement('#root');
 
@@ -14,7 +14,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     height: '80%',
-    width: '80%'
+    width: '80%',
+    backgroundColor: '#39525C'
   },
 };
 
@@ -30,7 +31,6 @@ function Background ({ update }) {
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
     }
   
     function closeModal() {
@@ -59,10 +59,11 @@ function Background ({ update }) {
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Background</h2>
-          <button onClick={closeModal}>close</button>
-          {backgrounds.map((background) => { return(
-            <BackgroundCard key={background.name} background={background} update={update}/>
-          )})}
+          <div className='background-container'>
+            {backgrounds.map((background) => { return(
+              <BackgroundCard key={background.name} background={background} update={update}/>
+            )})}
+          </div>
         </Modal>
       </div>
       </>

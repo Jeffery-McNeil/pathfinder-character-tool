@@ -70,10 +70,10 @@ function BackgroundCard ({ background, update }) {
     if (show === true) { return (
         <article>
             <h1 onClick={handleClick}>{background.name}</h1>
-            <div>
+            <div className='background-card'>
                 {parse(background.data.description.value.replace(/@.*]/, ""))}
             </div>
-            <button onClick={handleSelect}>Select</button>
+            <button id="background-select" onClick={handleSelect}>Select</button>
         </article>
     )} else { return (
             <article>

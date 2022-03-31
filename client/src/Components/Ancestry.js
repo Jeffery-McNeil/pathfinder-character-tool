@@ -16,6 +16,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     width: '80%',
     height: '80%',
+    backgroundColor: '#39525C'
   },
 };
 
@@ -41,7 +42,6 @@ function Ancestry ({ update }) {
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
     }
   
     function closeModal() {
@@ -61,8 +61,7 @@ function Ancestry ({ update }) {
           contentLabel="Example Modal"
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Select Ancestry</h2>
-          <button onClick={closeModal}>close</button>
-          <div>
+          <div className='ancestry-container'>
             {ancestries.map((ancestry) => { 
               return (
                 <AncestryCard key={ancestry._id} ancestry={ancestry} update={update}/>

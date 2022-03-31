@@ -1,5 +1,4 @@
-
-.ancestry-container {
+.background-container {
     position: relative;
     width: 60%; 
     height: 75%;
@@ -8,7 +7,7 @@
     background-color: #39525C;
 }
 
-.ancestry-card {
+.background-card {
     position: relative;
     left: 5%;
     top: 5%;
@@ -16,14 +15,15 @@
     width: 135%;
 }
 
-.ancestry-text {
+.background-text {
     position: relative;
     left: 2%;
 }
 
-#ancestry-select {
+#background-select {
     position: relative;
     left: 100%;
+    top: 0%;
     height: 5%;
     line-height: 5%;
     border: 0;
@@ -41,6 +41,6 @@
     cursor: pointer;
     background-color: #404040;
   }
-#ancestry-select {
+#background-select {
     background: darkslategray;
 }

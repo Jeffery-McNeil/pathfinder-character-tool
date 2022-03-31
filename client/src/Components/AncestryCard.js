@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import AncestryFeature from './AncestryFeature';
+import '../Css/Ancestry.css'
 
 
 function AncestryCard ({ ancestry, update }) {
@@ -89,7 +90,7 @@ function AncestryCard ({ ancestry, update }) {
     if (show === true) { return (
             <article>
                 <h1 onClick={handleClick}>{ancestry.name}</h1>
-                <div>
+                <div className='ancestry-card'>
                     <p>Hit Points: {ancestry.data.hp}</p>
                     <p>Size: {size}</p>
                     <p>Speed: {ancestry.data.speed}</p>
@@ -103,7 +104,7 @@ function AncestryCard ({ ancestry, update }) {
                         );
                     }) : null}
                 </div>
-                <button onClick={handleSelect}>Select</button>
+                <button id="ancestry-select" onClick={handleSelect}>Select</button>
             </article>
     )} else { return (
             <article>
