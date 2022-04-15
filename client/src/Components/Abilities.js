@@ -118,7 +118,7 @@ function Abilities ({ ancestry, background, job }) {
           Dexterity : dexterity,
           Constitution : constitution,
           Intelligence : intelligence,
-          Wisdom : wisdom,
+          Widsom : wisdom,
           Charisma : charisma
         }
 
