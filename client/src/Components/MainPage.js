@@ -63,9 +63,9 @@ function MainPage() {
           <Skills />
         </div>
       </div>
-      <div className='character-sheet'>
+      {/* <div className='character-sheet'>
         <CharacterSheet character={character} ancestry={ancestry} background={background} job={job} abilityScores={abilityScores} proficiencies={proficiencies}/>
-      </div>
+      </div> */}
     </div>
   )
 }
