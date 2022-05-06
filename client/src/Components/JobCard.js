@@ -42,15 +42,6 @@ function JobCard ({ job, update }) {
                 job_id: newJob.id
             }
 
-            fetch('/proficiencies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(perception)
-            }).then((response)=> response.json())
-            .then((data)=> console.log(data))
-
 
             const savesArr = Object.entries(job.data.savingThrows)
             const attacksArr = Object.entries(job.data.attacks)
@@ -66,17 +57,6 @@ function JobCard ({ job, update }) {
                     proficiency_level: proficiency(save[1]),
                     job_id: newJob.id
                 }
-                return (
-                fetch('/proficiencies', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newSave)
-                }).then((response)=> response.json())
-                .then((data)=> console.log(data))
-                )
-    
             })
     
             filteredAttacksArr.map((attack)=> {
@@ -85,19 +65,7 @@ function JobCard ({ job, update }) {
                     name: attack[0],
                     proficiency_level: proficiency(attack[1]),
                     job_id: newJob.id
-                }
-                
-                return (
-                fetch('/proficiencies', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newAttack)
-                }).then((response)=> response.json())
-                .then((data)=> console.log(data))
-                )
-    
+                }  
             })
     
             defensesArr.map((defense)=> {
@@ -107,24 +75,11 @@ function JobCard ({ job, update }) {
                     proficiency_level: proficiency(defense[1]),
                     job_id: newJob.id
                 }
-                
-                return (
-                fetch('/proficiencies', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newDefense)
-                }).then((response)=> response.json())
-                .then((data)=> console.log(data))
-                )
     
             })
             
         })
 
-        
-    }
 
     function abilityName (arg) {
         switch (arg) {
