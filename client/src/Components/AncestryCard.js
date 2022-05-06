@@ -59,7 +59,6 @@ function AncestryCard ({ ancestry, update }) {
     }
 
     function handleSelect() {
-        update()
 
         const ancestryChoice = {
             name: ancestry.name,
@@ -71,19 +70,6 @@ function AncestryCard ({ ancestry, update }) {
             ability_flaw: ancestry.data.flaws[0].value[0],
             character_id: 1
         }
-
-        fetch(`./ancestries/${localStorage.getItem('characterId')}`, {
-            method: 'DELETE'
-        })
-
-        fetch('/ancestries', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ancestryChoice)
-        }).then((response)=> response.json())
-        .then((data)=> console.log(data))
     }
 
 
