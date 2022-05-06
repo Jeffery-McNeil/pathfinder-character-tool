@@ -20,19 +20,6 @@ function BackgroundCard ({ background, update }) {
             character_id: localStorage.getItem('characterId')
             
         }
-
-        fetch(`/backgrounds/${localStorage.getItem('characterId')}`, {
-            method: 'DELETE'
-        })
-
-        fetch('/backgrounds', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(backgroundChoice)
-        }).then((response)=> response.json())
-        .then((data)=> console.log(data))
     }
 
     function abilityName (arg) {
